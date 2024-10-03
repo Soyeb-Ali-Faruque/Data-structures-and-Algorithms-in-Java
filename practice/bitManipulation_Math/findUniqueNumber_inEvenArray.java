@@ -6,6 +6,9 @@ public class findUniqueNumber_inEvenArray {
         System.out.println(findUnique(Test));
 
     }
+
+    //Time Complexity --> O(n)
+    //Space Complexity --> O(1)
     static int findUnique(int[] array){
         int ans=0;
         for(int i=0;i<array.length;i++){

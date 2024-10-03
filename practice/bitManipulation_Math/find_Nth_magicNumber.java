@@ -6,6 +6,9 @@ public class find_Nth_magicNumber {
         System.out.println(magicNumber(3));
 
     }
+
+    //Time Complexity --> O(log(number))
+    //Space Complexity --> O(1)
     static int magicNumber(int number){
         int magic_number=0;
         int flexible_power=1;
@@ -15,13 +18,5 @@ public class find_Nth_magicNumber {
         }
         return magic_number;
     }
-//    static int recursive_magicNumber(int number,int power){
-//        if(number/2 ==1){
-//            return 1*(int)Math.pow(5,power);
-//        }
-//        int ans=(number %2)* (int)Math.pow(5,power);
-//        number/=2;
-//        ans+=recursive_magicNumber(number,++power);
-//        return  ans;
-//    }
+
 }
