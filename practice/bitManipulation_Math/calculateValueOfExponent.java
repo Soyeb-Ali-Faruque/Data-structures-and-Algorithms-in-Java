@@ -2,7 +2,9 @@ package bitManipulation_Math;
 
 public class calculateValueOfExponent {
     public static void main(String[] args) {
-        System.out.println(calculate_optimized(3,2));
+//        System.out.println(calculate_optimized(3,2));
+        System.out.println(Integer.toBinaryString(60));
+
     }
 
     //Time Complexity --> O(power)

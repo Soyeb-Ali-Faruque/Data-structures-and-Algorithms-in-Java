@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 public class findUniqueNumber_inOddArray {
     public static void main(String[] args) {
-        int[] array={2,3,2,7,7,8,8};
-        System.out.println(findUniqueNumber(array,2));
+//        int[] array={2,3,2,7,7,8,8};
+//        System.out.println(findUniqueNumber(array,2));
+        System.out.println(-4);
+        System.out.println(~(-4) +1);
 
     }
 
