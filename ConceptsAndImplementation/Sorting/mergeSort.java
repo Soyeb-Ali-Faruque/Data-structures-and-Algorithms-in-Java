@@ -10,30 +10,6 @@ public class mergeSort {
         System.out.println(Arrays.toString(Test));
 
     }
-//
-//    static int[] mergeSort_inPlace(int[] array,int s,int e){}
-//    static int[] mergeInPlace(int[] array,int as,int ae,int bs,int be){
-//        int i=as;
-//        int j=bs;
-//        while()
-//    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     static int[] merge_sort(int[] array) {
         if (array.length == 1) return array;
         int mid = (array.length - 1) / 2;
