@@ -4,6 +4,9 @@ public class singlyLinkedList<E>{
     private int size=0;
     Node head=null;
     //Insertions
+    void add(E data){
+        addLast(data);
+    }
     void addFirst(E data){
         Node node=new Node(data);
         if(!(size == 0)) node.next=head;
@@ -43,22 +46,27 @@ public class singlyLinkedList<E>{
         }
     }
     //deletion
-    int removeFirst(){
-        if(size == 0) return -1;
+    E remove(){
+        return removeLast();
+
+    }
+    E removeFirst(){
+        if(size == 0) return null;
         size--;
-        int data=head.next;
+        E data=head.data;
         head=head.next;
         return data;
     }
-    int removeLast(){
-        if(size == 0) return -1;
+    E removeLast(){
+        if(size == 0) return null;
         size--;
         Node temp=head;
         for(int i=0;i<size-1;i++){
             temp=temp.next;
         }
-
-
+        E data = temp.next.data;
+        temp.next=null;
+        return data;
     }
     void display(){
         Node temp=head;
@@ -70,20 +78,20 @@ public class singlyLinkedList<E>{
     }
 
     //fetch
-    int getFirst(){
-        if(size == 0) return -1;
+    E getFirst(){
+        if(size == 0) return null;
         return head.data;
     }
-    int getlast(){
-        if(size == 0) return -1;
+    E getlast(){
+        if(size == 0) return null;
         Node temp=head;
         while(temp.next != null){
             temp=temp.next;
         }
         return temp.data;
     }
-    int get(int index){
-        if(size == 0 || size<index) return -1;
+    E get(int index){
+        if(size == 0 || size<index) return null;
         Node temp=head;
         for(int i=0;i<index;i++){
             temp=temp.next;
@@ -118,7 +126,44 @@ public class singlyLinkedList<E>{
         head=null;
     }
 
+    Node middleNode(){
+        if(size == 0){
+            Node node=new Node(null);
+        }
+        int mid=size/2;
+        Node temp=head;
+        for(int i=0;i<mid;i++){
+            temp=temp.next;
+        }
+        return temp;
+    }
+    singlyLinkedList merge(singlyLinkedList<E> other){
+        Node temp=this.head;
+        if(temp == null){
+            this.head=other.head;
+            return this;
+        }
+        //go till the end
+        while(temp.next != null){
+            temp=temp.next;
+        }
+        temp.next=other.head;
+        return this;
+    }
+    E findNthFromEnd(int index){
+        index=size-index;
+        return get(index);
+    }
 
+
+
+
+
+
+    public String toString(){
+        this.display();
+        return "";
+    }
 
 
 
@@ -129,13 +174,9 @@ public class singlyLinkedList<E>{
             Node(E data){
                 this.data=data;
             }
-
-
-
-
-
-
-
+            public String toString(){
+                return (" DATA : "+data);
+            }
         }
     }
 
