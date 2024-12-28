@@ -14,8 +14,8 @@ public class TestMain_linkedList {
         test.add(80);
         test.add(90);
         test.add(100);
-
-        System.out.println(test.get(0));
+        test.reverse();
+        System.out.println(test);
 
 
 

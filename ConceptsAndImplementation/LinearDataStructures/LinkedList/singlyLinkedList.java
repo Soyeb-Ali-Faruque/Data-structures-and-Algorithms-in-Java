@@ -155,6 +155,19 @@ public class singlyLinkedList<E>{
         return get(index);
     }
 
+void reverse(){
+      Node node=recursive_reverse(this.head);
+      node.next=null;
+}
+Node recursive_reverse(Node head){
+        if(head.next == null) {
+            this.head=head;
+            return head;
+        }
+        Node node=recursive_reverse(head.next);
+        node.next=head;
+        return head;
+}
 
 
 
