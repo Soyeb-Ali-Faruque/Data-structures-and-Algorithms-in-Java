@@ -1,50 +1,65 @@
 package NonLinearDataStructure.Tree;
 
 public class BinarySearchTree<E extends Number & Comparable<E>> {
-    //Node class
+    //Node class structure
     class Node {
         E data;
         Node left = null;
         Node right = null;
+        int height=-1;
 
+
+        //Node class constructors
+        Node(){};
         Node(E data) {
             this.data = data;
         }
+
+        @Override
         public String toString(){
             return String.valueOf(data);
         }
     }
 
-        Node root;
+    Node root;
 
-        //methods
-        public void insert(E data){
+
+    //insertion
+    public void insert(E data){
             root=insertElement(root,data);
 
         }
+        /* recursively traversing the node
+        and inserting new node
+        and recalculating the heights of each node */
          private Node insertElement(Node temp,E data){
             if(temp == null ) {
                 Node node =new Node(data);
+                node.height=0;
                 return node;
             }
             if(data.compareTo(temp.data) < 0) temp.left = insertElement(temp.left,data);
             else temp.right = insertElement(temp.right,data);
+            temp.height = (getNodeHeight(temp.left) > getNodeHeight(temp.right))?getNodeHeight(temp.left)+1:getNodeHeight(temp.right)+1;
             return temp;
         }
 
 
-        //searching element
-        public boolean search(E data){
-            return search(root,data);
+    //searching data from the root boolean return
+    public Boolean search(E data){
+            return (search(root,data) != null)?true:false;
         }
-        private boolean search(Node temp,E data){
-            if(temp == null) return false;
-            if(data.equals(temp.data)) return true;
+        private Node search(Node temp,E data){
+             if(temp == null) return null;
+            if(data.equals(temp.data)) return temp;
             if(data.compareTo(temp.data) < 0 ) return search(temp.left,data);
             return search(temp.right,data);
         }
 
+
+
         //Traversal
+        //(left,root,right)
         public void inorderTraversal(){
             inorderTraversal(root);
         }
@@ -54,7 +69,7 @@ public class BinarySearchTree<E extends Number & Comparable<E>> {
             System.out.print(temp+"  ");
             inorderTraversal(temp.right);
         }
-
+        //((root,left,right)
         public void preorderTraversal(){
             preorderTraversal(root);
         }
@@ -65,7 +80,7 @@ public class BinarySearchTree<E extends Number & Comparable<E>> {
             preorderTraversal(temp.right);
 
         }
-
+        //(left,right,root)
         public void postorderTraversal(){
             postorderTraversal(root);
         }
@@ -77,7 +92,8 @@ public class BinarySearchTree<E extends Number & Comparable<E>> {
         }
 
 
-        //Min Max
+
+        //Min
         public Node findMin(){
             if(root.left == null ) return root;
             return min(root.left,root);
@@ -87,22 +103,37 @@ public class BinarySearchTree<E extends Number & Comparable<E>> {
             return min(temp.left,temp);
         }
 
+
+        //searching the node and returning its heights else -1
+        public int searchNodeHeight(E data){
+        return getNodeHeight(search(root,data));
+    }
+
+        //Returning tree's overall height
         public int getTreeheight(){
-            return findTreeHeight(root);
-        }
-        private int findTreeHeight(Node temp){
-            if(temp == null) return -1;
-            int leftSubTreeHeight=findTreeHeight(temp.left)+1;
-            int rightSubTreeHeight=findTreeHeight(temp.right) + 1;
-            return (leftSubTreeHeight > rightSubTreeHeight)? leftSubTreeHeight : rightSubTreeHeight;
+            return root.height;
         }
 
-        public boolean checkBalanced(){
-            return isBalanced(root);
+        //Specified node height
+        public int getNodeHeight(Node node){
+            if(node ==null) return -1;
+            return node.height;
         }
-        private boolean isBalanced(Node temp){
 
 
+       //Boolean tree is balanced or not
+        public boolean isTreeBalanced(){
+            return checkBalanced(root);
+        }
+        //Recursive implementation of checking tree is balanced or not and returns boolean values
+        private boolean checkBalanced(Node node){
+            if(node == null) return true;
+            return (checkSubTreeHeightDifference(node.left,node.right) && checkBalanced(node.left) && checkBalanced(node.right));
+        }
+        //Calculating balancing difference
+        private boolean checkSubTreeHeightDifference(Node left,Node right){
+            int heightDiff= getNodeHeight(left) - getNodeHeight(right);
+            return (heightDiff >=-1 && heightDiff <=1)?true:false;
         }
 
     }
