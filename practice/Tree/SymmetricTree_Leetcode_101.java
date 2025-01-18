@@ -7,26 +7,8 @@ import java.util.ArrayList;
 import java.util.Deque;
 
 public class SymmetricTree_Leetcode_101 {
-    TreeNode root;
-    TreeNode node=new TreeNode(1);
-    root=node;
-    TreeNode node1=new TreeNode(2);
-    TreeNode node2=new TreeNode(2);
-    TreeNode node3=new TreeNode(3);
-    TreeNode node4=new TreeNode(4);
-    TreeNode node5=new TreeNode(4);
-    TreeNode node6=new TreeNode(3);
-    root.left=node1;
-    root.right=node2;
-    root.left.left=node3;
-    root.left.right=node4;
-    root.right.left=node5;
-    root.right.right=node6;
 
-    public static void main(String[] args) {
 
-        isSymmetric(root);
-    }
     public static boolean isSymmetric(TreeNode root) {
         boolean ans=true;
         ArrayList<TreeNode> level=new ArrayList<>();

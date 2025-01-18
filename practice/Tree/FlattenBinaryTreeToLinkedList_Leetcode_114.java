@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Queue;
 
 public class FlattenBinaryTreeToLinkedList_Leetcode_114 {
-    public void flatten(TreeNode root) {
+    public TreeNode flatten(TreeNode root) {
         if(root == null ) return root;
-        createLinkedList(root);
         ArrayList<TreeNode> nodes=new ArrayList<>();
+        createLinkedList(root,nodes);
         nodes.add(null);
         for(int i=0;i<nodes.size()-1;i++){
             nodes.get(i).left=null;

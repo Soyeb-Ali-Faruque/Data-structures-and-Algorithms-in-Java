@@ -12,6 +12,6 @@ public class DiameterOfBinaryTree_Leetcode_543 {
         int left=helper(node.left);
         int right=helper(node.right);
         if(left+right > diameter) diameter=left+right;
-        return (left > right )?left+1;right+1;
+        return (left > right )?left+1:right+1;
     }
 }

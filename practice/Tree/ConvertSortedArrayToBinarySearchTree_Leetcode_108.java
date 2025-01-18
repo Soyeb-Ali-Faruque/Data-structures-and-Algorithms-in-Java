@@ -3,6 +3,7 @@ package Tree;
 public class ConvertSortedArrayToBinarySearchTree_Leetcode_108 {
     public TreeNode sortedArrayToBST(int[] nums) {
         TreeNode root=constructBinarySearchTree(nums,0,nums.length-1);
+        return root;
     }
     TreeNode constructBinarySearchTree(int[] array,int s,int e){
         if(s>e) return null;
