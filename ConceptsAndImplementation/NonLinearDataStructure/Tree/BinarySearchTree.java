@@ -1,6 +1,8 @@
 package NonLinearDataStructure.Tree;
 
 public class BinarySearchTree<E extends Number & Comparable<E>> {
+
+
     //Node class structure
     class Node {
         E data;
@@ -45,11 +47,61 @@ public class BinarySearchTree<E extends Number & Comparable<E>> {
         }
 
 
+
+        protected   Node getParent(Node parent,Node node){
+             if(parent == null || parent == node) return null;
+             if(parent.left == node || parent.right == node) return parent;
+             Node foudnParent=getParent(parent.left,node);
+             if(foudnParent == null) foudnParent=getParent(parent.right,node);
+             return foudnParent;
+    }
+
+        public E delete(E data){
+             Node current=search(root,data);
+             Node parent=getParent(root,current);
+            if( current == null) return null;
+            boolean haveParent=(parent != null)? true: false;
+            //if deleting node is a leaf node means has no childrens
+            if(current.left == null && current.right == null){
+                if(haveParent){
+                    if(data.compareTo(parent.data) > 0) parent.right=null;
+                    else parent.left=null;
+                }
+            }
+            //if deleting node contains 2 childrens
+            else if(current.left !=null && current.right != null){
+                Node node=min(current.right,current);
+                Node nodeParent=getParent(root,node);
+                current.data=node.data;
+                if(nodeParent == current){
+                    current.right=null;
+                }
+                else if(node.right != null) nodeParent.left=node.right;
+                else nodeParent.left=null;
+
+            }
+            //Deleting node have only left child
+            else if(current.left != null){
+                if(current.data.compareTo(parent.data) > 0) parent.right=current.left;
+                else parent.left=current.left;
+            }
+            //Deleting node have only right child
+            else{
+                if(current.data.compareTo(parent.data) > 0) parent.right=current.right;
+                else parent.left=current.right;
+
+            }
+            return data;
+
+        }
+
+
+
     //searching data from the root boolean return
     public Boolean search(E data){
             return (search(root,data) != null)?true:false;
         }
-        private Node search(Node temp,E data){
+         protected Node search(Node temp,E data){
              if(temp == null) return null;
             if(data.equals(temp.data)) return temp;
             if(data.compareTo(temp.data) < 0 ) return search(temp.left,data);
@@ -98,7 +150,7 @@ public class BinarySearchTree<E extends Number & Comparable<E>> {
             if(root.left == null ) return root;
             return min(root.left,root);
         }
-        private Node min(Node temp,Node prev){
+        protected Node min(Node temp,Node prev){
             if(temp == null ) return prev;
             return min(temp.left,temp);
         }
