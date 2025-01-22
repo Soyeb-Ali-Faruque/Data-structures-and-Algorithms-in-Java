@@ -168,7 +168,7 @@ public class BinarySearchTree<E extends Number & Comparable<E>> {
 
         //Specified node height
         public int getNodeHeight(Node node){
-            if(node ==null) return -1;
+            if(node ==null) return 0;
             return node.height;
         }
 
