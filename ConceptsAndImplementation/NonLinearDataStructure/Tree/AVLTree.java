@@ -56,8 +56,8 @@ public class AVLTree<E extends Number & Comparable<E>> extends BinarySearchTree<
     }
 
     @Override
-    public E delete(E data) {
-        return  null;
+    public void delete(E data) {
+
     }
 
     private Node rightRotate(Node node){

@@ -19,7 +19,8 @@ public class BinarySearchTree<E extends Number & Comparable<E>> {
 
         @Override
         public String toString(){
-            return String.valueOf(data);
+            String output="(Data: "+data+" Height: "+height+")";
+            return output;
         }
     }
 
@@ -46,54 +47,37 @@ public class BinarySearchTree<E extends Number & Comparable<E>> {
             return temp;
         }
 
-
-
-        protected   Node getParent(Node parent,Node node){
-             if(parent == null || parent == node) return null;
-             if(parent.left == node || parent.right == node) return parent;
-             Node foudnParent=getParent(parent.left,node);
-             if(foudnParent == null) foudnParent=getParent(parent.right,node);
-             return foudnParent;
-    }
-
-        public E delete(E data){
-             Node current=search(root,data);
-             Node parent=getParent(root,current);
-            if( current == null) return null;
-            boolean haveParent=(parent != null)? true: false;
-            //if deleting node is a leaf node means has no childrens
-            if(current.left == null && current.right == null){
-                if(haveParent){
-                    if(data.compareTo(parent.data) > 0) parent.right=null;
-                    else parent.left=null;
-                }
-            }
-            //if deleting node contains 2 childrens
-            else if(current.left !=null && current.right != null){
-                Node node=min(current.right,current);
-                Node nodeParent=getParent(root,node);
-                current.data=node.data;
-                if(nodeParent == current){
-                    current.right=null;
-                }
-                else if(node.right != null) nodeParent.left=node.right;
-                else nodeParent.left=null;
-
-            }
-            //Deleting node have only left child
-            else if(current.left != null){
-                if(current.data.compareTo(parent.data) > 0) parent.right=current.left;
-                else parent.left=current.left;
-            }
-            //Deleting node have only right child
-            else{
-                if(current.data.compareTo(parent.data) > 0) parent.right=current.right;
-                else parent.left=current.right;
-
-            }
-            return data;
-
+        public void delete(E data){
+            root=delete(root,data);
         }
+        private Node delete(Node node,E data){
+             if(node == null ) return null;
+             if(node.data.compareTo(data) == 0){
+                 //leaf node
+                 if(node.left == null  && node.right == null) return null;
+                 //Two child
+                 else if(node.left != null && node.right != null){
+                     E min=min(node.right,node).data;
+                     node.data=min;
+                     node.right=delete(node.right,min);
+                     node.height=Math.max(getNodeHeight(node.left),getNodeHeight(node.right))+1;
+                     return node;
+                 }
+                 //Only left child
+                 else if (node.left != null ) {
+                     return node.left;
+                 }
+                 //Only right child
+                 else{
+                     return node.right;
+                 }
+                 }
+             if(node.data.compareTo(data) > 0) node.left=delete(node.left,data);
+             else node.right=delete(node.right,data);
+             node.height=Math.max(getNodeHeight(node.left),getNodeHeight(node.right))+1;
+             return node;
+        }
+
 
 
 
@@ -168,7 +152,7 @@ public class BinarySearchTree<E extends Number & Comparable<E>> {
 
         //Specified node height
         public int getNodeHeight(Node node){
-            if(node ==null) return 0;
+            if(node ==null) return -1;
             return node.height;
         }
 
