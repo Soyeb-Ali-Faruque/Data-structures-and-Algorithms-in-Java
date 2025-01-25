@@ -22,6 +22,42 @@ public class AVLTree<E extends Number & Comparable<E>> extends BinarySearchTree<
         return balance(node);
     }
 
+    @Override
+    public void delete(E data) {
+        root=delete(root,data);
+    }
+
+    private Node delete(Node node,E data){
+        if(node == null ) return null;
+        if(node.data.compareTo(data) == 0){
+            //leaf node
+            if(node.left == null  && node.right == null) return null;
+                //Two child
+            else if(node.left != null && node.right != null){
+                E min=min(node.right,node).data;
+                node.data=min;
+                node.right=delete(node.right,min);
+                node.height=Math.max(getNodeHeight(node.left),getNodeHeight(node.right))+1;
+                return node;
+            }
+            //Only left child
+            else if (node.left != null ) {
+                return node.left;
+            }
+            //Only right child
+            else{
+                return node.right;
+            }
+        }
+        if(node.data.compareTo(data) > 0) node.left=delete(node.left,data);
+        else node.right=delete(node.right,data);
+        node.height=Math.max(getNodeHeight(node.left),getNodeHeight(node.right))+1;
+        return balance(node);
+    }
+
+
+
+
     private Node balance(Node node){
         int factor=getBalanceFactor(node);
         if(factor>=-1 && factor <= 1) return node;
@@ -55,10 +91,7 @@ public class AVLTree<E extends Number & Comparable<E>> extends BinarySearchTree<
         return (getNodeHeight(node.left) - getNodeHeight(node.right));
     }
 
-    @Override
-    public void delete(E data) {
 
-    }
 
     private Node rightRotate(Node node){
         Node child=node.left;
