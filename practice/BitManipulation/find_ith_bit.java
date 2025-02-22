@@ -1,4 +1,4 @@
-package bitManipulation_Math;
+package BitManipulation;
 
 public class find_ith_bit {
     public static void main(String[] args) {

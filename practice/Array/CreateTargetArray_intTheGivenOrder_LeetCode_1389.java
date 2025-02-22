@@ -1,5 +1,7 @@
 package Array;
 
+import java.util.Arrays;
+
 public class CreateTargetArray_intTheGivenOrder_LeetCode_1389 {
     public int[] createTargetArray(int[] nums, int[] index) {
         int[] ans=new int[index.length];

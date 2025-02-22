@@ -1,4 +1,4 @@
-package bitManipulation_Math;
+package BitManipulation;
 
 public class xorOfNumbersInRange {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package bitManipulation_Math;
+package Math;
 
 public class Power_ofFour_Leetcode_342 {
     public boolean isPowerOfFour(int n) {

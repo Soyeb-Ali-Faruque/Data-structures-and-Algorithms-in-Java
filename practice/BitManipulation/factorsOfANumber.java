@@ -1,4 +1,4 @@
-package bitManipulation_Math;
+package BitManipulation;
 
 import java.util.ArrayList;
 

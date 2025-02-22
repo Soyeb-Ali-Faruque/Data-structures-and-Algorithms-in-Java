@@ -1,4 +1,4 @@
-package bitManipulation_Math;
+package BitManipulation;
 
 public class GCD_OR_HCF {
     public static void main(String[] args) {

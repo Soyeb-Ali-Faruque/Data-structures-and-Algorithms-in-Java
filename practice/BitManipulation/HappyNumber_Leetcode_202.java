@@ -1,4 +1,4 @@
-package bitManipulation_Math;
+package BitManipulation;
 
 public class HappyNumber_Leetcode_202 {
     public boolean isHappy(int n) {

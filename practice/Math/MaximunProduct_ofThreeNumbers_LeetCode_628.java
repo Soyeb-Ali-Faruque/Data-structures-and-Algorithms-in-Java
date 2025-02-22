@@ -1,8 +1,8 @@
-package bitManipulation_Math;
+package Math;
 
 import java.util.Arrays;
 
-public class MaximumProduct_ofThreeNumber_Leetcode_628 {
+public class MaximunProduct_ofThreeNumbers_LeetCode_628 {
     public int maximumProduct(int[] nums) {
 
         Arrays.sort(nums);

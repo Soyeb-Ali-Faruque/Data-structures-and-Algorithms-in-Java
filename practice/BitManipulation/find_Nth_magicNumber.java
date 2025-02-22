@@ -1,4 +1,4 @@
-package bitManipulation_Math;
+package BitManipulation;
 public class find_Nth_magicNumber {
     // Bit manupulation
     //2 = 1* 5^2 + 0*5^1 = magic number

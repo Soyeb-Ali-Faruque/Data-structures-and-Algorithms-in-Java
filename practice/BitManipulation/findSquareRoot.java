@@ -1,4 +1,4 @@
-package bitManipulation_Math;
+package BitManipulation;
 
 public class findSquareRoot {
     public static void main(String[] args) {
