@@ -1,4 +1,4 @@
-package binarySearch;
+package Searching;
 
 public class ceilingOfANumber {
     public static void main(String[] args) {
