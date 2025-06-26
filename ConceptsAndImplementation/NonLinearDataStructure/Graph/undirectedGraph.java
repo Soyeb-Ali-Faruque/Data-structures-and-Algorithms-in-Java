@@ -177,6 +177,42 @@ public class undirectedGraph<T>{
     }
 
 
+    //check bypartite graph or not
+    public boolean isBipartite(){
+        for(T startingVertex : graph.keySet()){
+            if(!checkBipartite_BFS(startingVertex)) return false;
+
+        }
+        return true;
+
+    }
+
+    private boolean checkBipartite_BFS(T startingVertex){
+        HashMap<T,Integer> map= new HashMap<>();//accept values (-1,0,1)
+        for(T vertex : graph.keySet()) map.put(vertex,-1);
+        Queue<T> queue =new LinkedList<>();
+        queue.add(startingVertex);
+        map.put(startingVertex,0);
+        while(!queue.isEmpty()){
+            T currentVertex = queue.poll();
+            List<Edge> list = graph.get(currentVertex);
+            for(Edge e : list){
+                int value = map.get(e.dest);
+                //it is colored already
+                if(value >= 0 && value < 2){
+                    //check if matched with its adjacent vertex
+                    if(map.get(currentVertex).equals(map.get(e.dest))) return false;
+                }else{
+                    //set map as colored
+                    map.put(e.dest,1-map.get(currentVertex));
+                    queue.add(e.dest); // adding to the queue
+                }
+            }
+        }
+        return true;
+    }
+
+
 
     //Utility methods
     public void clear() {

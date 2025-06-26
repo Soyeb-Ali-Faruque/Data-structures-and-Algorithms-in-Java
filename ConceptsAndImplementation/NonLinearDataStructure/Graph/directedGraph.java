@@ -155,6 +155,80 @@ public class directedGraph<T>{
     }
 
 
+    public void topologicalSort(){
+        if(this.hasCycle()){
+            System.out.println("Operation discarded. This graph contains cycle!");
+            return;
+        }
+        Stack<T> stack =new Stack<>();
+        HashMap<T,Boolean> visited = new HashMap<>();
+        for(T vertex : graph.keySet()) visited.put(vertex,false);
+
+        //sorting
+        for( T vertex : graph.keySet()){
+            dfsSorting(vertex,visited,stack);
+        }
+        //printing order
+        while(!stack.isEmpty()) System.out.print(stack.pop()+"  ");
+    }
+    private void dfsSorting(T vertex,HashMap<T,Boolean> visited,Stack<T> stack){
+        if(visited.get(vertex)) return;
+        visited.put(vertex,true);
+        List<Edge> list = graph.get(vertex);
+        for(Edge e : list){
+            dfsSorting(e.dest,visited,stack);
+        }
+        stack.push(vertex);
+    }
+
+    //kahns algorithm(it is used for cycle detection and ass well as topological sort)
+    //when cycle found?
+    //1.when there is no in-degree 0 initially of any vertex then there is a cycle
+    //2.when tehre is any vertex missing while performing dfs the also
+    //Note: in-degree means how many incomiing edges for a particular vertex
+    public void kahnsAlgorithm(){
+        //calculate the in degree of all vertices
+        HashMap<T,Integer> inDegree = new HashMap<>();
+        //initialize
+        for(T vertex : graph.keySet()) inDegree.put(vertex,0);
+
+        for(T vertex : graph.keySet()){
+            List<Edge> list = graph.get(vertex);
+            for (Edge e : list){
+                inDegree.put(e.dest,inDegree.get(e.dest)+1);
+            }
+        }
+        //find and add 0 indegree vertices to the queue
+        Queue<T> queue = new LinkedList<>();
+        for(T vertex : graph.keySet()){
+            if(inDegree.get(vertex) == 0) queue.add(vertex);
+        }
+        if(queue.isEmpty()) {
+            System.out.println("This graph is a directed cyclic graph.Not a DAG(Directed Acyclic Graph");
+            return;
+        }
+        //order queue
+        Queue<T> order =new LinkedList<>();
+        //while loop for bfs
+        while(!queue.isEmpty()){
+            T currentVertex = queue.poll();
+            order.add(currentVertex);
+            List<Edge> list = graph.get(currentVertex);
+            for(Edge e : list){
+                inDegree.put(e.dest,inDegree.get(e.dest)-1);
+                if(inDegree.get(e.dest) == 0) queue.add(e.dest);
+            }
+        }
+        if(order.size() == graph.size()){
+            //print order as this is not a cyclic graph
+            while(!order.isEmpty()) System.out.print(order.poll()+"  ");
+        }else System.out.println("This graph is a directed cyclic graph.Not a DAG(Directed Acyclic Graph");
+    }
+
+
+
+
+
     // Utility methods
     public void clear(){
         graph = new HashMap<>();
