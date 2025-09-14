@@ -1,0 +1,23 @@
+Implement the following code
+
+class definition:
+    class Employee:
+        data field:
+            name: String
+            salary : int
+         implement a constructor using class variables
+         implement getter ans setter method
+
+    class EmployeeInfo:
+        enum definition:
+            named constants: BYNAME , BYSALARY
+
+        method definition:
+            sort(List<Employee> emps,final SortedMethod method)
+                method to return sorted list by name and salary
+                return type: List<Employee>
+                visibility: public
+
+            isCharacterPresentInAllNames(Collection<Employee> entities,String character)
+                method to check if employeelist contains a name starting with a specific character
+

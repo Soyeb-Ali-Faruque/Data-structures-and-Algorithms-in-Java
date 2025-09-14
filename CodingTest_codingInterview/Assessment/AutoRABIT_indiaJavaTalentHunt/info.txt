@@ -1,0 +1,4 @@
+This assessment had 20 questions.
+18 questions based on mcq including java,java code analysis,apti and spring ,spring boot.
+two java based coding questions.
+one sql query.

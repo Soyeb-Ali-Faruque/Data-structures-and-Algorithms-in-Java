@@ -1,0 +1,13 @@
+You are working with a database DB_Publishers
+and there is only one table TBL_Books
+write a query to display the publications,Language,
+the count of books as Count_Of_Books according to the publications and language
+the result should be in increasing order of the Publication and then by Language.
+
+
+Code:
+use DB_Publishers;
+select Publication,Language,count(*) as Count_Of_Books
+from TBL_Books
+group by Publication,Language
+order by Publication ASC,Language ASC;

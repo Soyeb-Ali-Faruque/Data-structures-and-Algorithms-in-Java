@@ -1,0 +1,47 @@
+An online product store provide discounts through coupon.
+You need to write code for multiple classed to handle this work-flow
+like:
+    validate the coupon
+    generate netPrice
+    handle exception
+
+Classes details
+
+class Product
+String : productName
+String: coupon
+double: productPrice
+implement constructor
+
+
+class Validator
+methods:
+
+    method 1:
+    public String validateCoupon(Product p) throws InvalidCouponException
+    validate the coupon by the below following rules:
+        1.The coupon must not be null
+        2. The coupon must contains hyphen(-) as separotor
+
+    coupon format:
+        productName-discountValue
+        discountValue range can be 10 to 25 inclusive
+    if all the conditions satisfied then return "Valid Coupon"
+    if any one conditions fails throw an exception InvalidCouponException with message "Invalid Coupon"
+
+
+    method 2:
+    public double netPrice(Product p)
+    calculate and return netPrice after applying coupon if coupon is valid
+    if coupon is invalid catch the exception and return the original price
+
+    formula for netPrice:
+        netPrice = productPrice - (discount/100*productPrice)
+
+
+
+class InvalidCouponException
+implement a custom exception
+
+constructor:
+    public InvalidCouponException(String msg)
