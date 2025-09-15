@@ -1,5 +1,5 @@
 An online product store provide discounts through coupon.
-You need to write code for multiple classed to handle this work-flow
+You need to write code for multiple classe to handle this work-flow
 like:
     validate the coupon
     generate netPrice
@@ -18,7 +18,7 @@ class Validator
 methods:
 
     method 1:
-    public String validateCoupon(Product p) throws InvalidCouponException
+        public String validateCoupon(Product p) throws InvalidCouponException
     validate the coupon by the below following rules:
         1.The coupon must not be null
         2. The coupon must contains hyphen(-) as separotor
